@@ -1,0 +1,5 @@
+ujson==1.35
+pymongo==3.4.0
+asq==1.2.1
+click==6.7
+typing==3.6.4
