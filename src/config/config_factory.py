@@ -1,5 +1,5 @@
+import json
 import os
-import ujson
 
 env = os.environ.get('env', 'local')
 print(f"Running for environment: {env}")
@@ -13,6 +13,6 @@ class CannotOpenConfigFileError(Exception):
 def get_config():
     try:
         config_file_stream = open(f'src/config/config.{env}.json')
-        return ujson.load(config_file_stream)
+        return json.load(config_file_stream)
     except FileNotFoundError:
         raise CannotOpenConfigFileError(f"config.{env}.json")

@@ -7,14 +7,15 @@ from asq.initiators import query
 
 from src.Migration import Migration
 from src.ParsedMigrationItem import ParsedMigrationItem
-from src.config.config_factory import get_config
+from src.colorful_print import print_blue, print_green, print_red
 from src.repository.MigrationRepository import MigrationRepository
 from src.repository.MongoInstanceFactory import get_db_instance
+
+migrations_dir = "migrations"
 
 
 def load_migration_items():
     py_search_re = re.compile('.py$', re.IGNORECASE)
-    migrations_dir = get_config()["migrations_dir"]
 
     plugin_files = filter(py_search_re.search,
                           os.listdir(os.path.join(os.path.dirname(__file__), migrations_dir)))
@@ -52,14 +53,14 @@ def revert_peacefully(mig_repo, parsed_migration_items):
 
         while len(migs_to_be_applied) > 0:
             pmig = migs_to_be_applied.pop(0)
-            print(f"Migration file {pmig.file_name} is going to be applied for revert process...")
+            print_green(f"REVERT: Migration file {pmig.file_name} is going to be applied...")
             pmig.migration.fail(get_db_instance())
 
         last_mig.make_reverted()
         mig_repo.update_migration(last_mig.to_document())
 
     else:
-        print("Revert failed: There is no migration that can be reverted in the mongo collection..")
+        print_red("Revert failed: There is no migration that can be reverted in the mongo collection..")
 
 
 def migrate_them_all(mig_repo, parsed_migration_items):
@@ -72,26 +73,37 @@ def migrate_them_all(mig_repo, parsed_migration_items):
     files_to_be_migrated = query(migs_to_be_applied).select(lambda pm: pm.file_name).to_list()
     while len(migs_to_be_applied) > 0:
         parsed_migration = migs_to_be_applied.pop(0)
-        print(f"Migration file {parsed_migration.file_name} is going to be applied...")
+        print_green(f"Migration file {parsed_migration.file_name} is going to be applied...")
         parsed_migration.migration.success(get_db_instance())
 
     if len(files_to_be_migrated) > 0:
         migration = Migration(files_to_be_migrated)
         mig_repo.create(migration)
+    else:
+        print_green("All the migration files already applied, skipping...")
 
 
 def get_parsed_migration_items():
-    migration_dir = get_config()["migrations_dir"]
-    migration_items = query(load_migration_items()).where(lambda mig: migration_dir in mig.__name__ and
-                                                                      mig.__name__.split(migration_dir)[1][
+    migration_items = query(load_migration_items()).where(lambda mig: migrations_dir in mig.__name__ and
+                                                                      mig.__name__.split(migrations_dir)[1][
                                                                           1] != "_").to_list()
+
     parsed_migration_items = []
     for migration_item in migration_items:
-        file_name = migration_item.__name__.split(f"{migration_dir}.")[1]
+        file_name = migration_item.__name__.split(f"{migrations_dir}.")[1]
         parsed_migration_items.append(ParsedMigrationItem(migration_item, file_name, int(file_name.split('-')[0])))
 
     return parsed_migration_items
 
 
 if __name__ == '__main__':
+    print_blue('''
+  ___(_) | _(_) | ___  _ __  
+ / __| | |/ / | |/ _ \| '_ \ 
+| (__| |   <| | | (_) | |_) |
+ \___|_|_|\_\_|_|\___/| .__/ 
+                      |_|    
+    ''')
+    print_blue("Easy mongo migration for all <3")
     action()
+

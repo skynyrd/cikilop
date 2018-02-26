@@ -1,6 +1,0 @@
-{
-  "migrations_dir" : "migrations",
-  "db_name" : "deneme",
-  "migrations_coll_name" : "migrationlist",
-  "mongo_uri" : "mongodb://mordorclsadmin:Mordor_123@sf-mordor-mongo-01.hepsiburada.dmz:27127,sf-mordor-mongo-02.hepsiburada.dmz:27127,sf-mordor-mongo-03.hepsiburada.dmz:27127,sf-mordor-mongo-04.hepsiburada.dmz:27127/deneme?connect=replicaset&replicaSet=mordorreplset&readPreference=secondary&maxPoolSize=50&connectTimeoutMS=10000&socketTimeoutMS=10000&authSource=admin"
-}
