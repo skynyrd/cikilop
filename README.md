@@ -8,7 +8,7 @@
 ```
 
 Cikilop is a simple and easy to use mongo migration tool that encourages you to write your migration scripts in Python.
-All you need is docker.
+All you need is docker (or python 3.6).
 
 ### Usage
 
