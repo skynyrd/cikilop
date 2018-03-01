@@ -1,3 +1,5 @@
+This readme is not completed.
+
 ```
       _ _    _ _             
   ___(_) | _(_) | ___  _ __  
@@ -31,7 +33,7 @@ __2. You need to name your script as `01-xxxx.py`, it must start with a number. 
 _Caveat: When applying the migration, scripts run with ascending order (e.g. `01-mig.py`, `02-mig.py`, `03-mig.py`).
  When reverting the migration, scripts run with descending order (e.g. `03-mig.py`, `02-mig.py`, `01-mig.py`)._
 
-__3. Prepare your simple configuration file:__
+__3. Prepare your simple configuration file, Its name should be config.ENVIRONMENT.json (ENVIRONMENT should be same as you used in run command):__
 
 ```json
 {
@@ -45,10 +47,25 @@ _Note: The name you set with __migrations_coll_name__ is used by cikilop itself.
 
 __4. Run it!__
 
-`ciki`
+With docker:
 
-### Important Notes:
+```bash
+bash ciki.sh -c ABSOLUTE_CONFIG_FILE_PATH -m ABSOLUTE_MIGRATIONS_FOLDER_PATH -e ENVIRONMENT
+```
+For revert, add `-r true`
 
+or
 
+```bash
+docker build -t cikilop .
+docker run -e env=ENVIRONMENT -v ABSOLUTE_CONFIG_FILE_PATH:/app/src/config/config.local.json -v ABSOLUTE_MIGRATIONS_FOLDER_PATH:/app/src/migrations cikilop
+```
 
-Under construction.
+For revert, add `--revert` to `docker run` command
+
+With Python:
+* Copy your migrations into migrations folder
+* Copy your config into config folder
+* Install Python 3.6
+* `pip3.6 install -r requirements.txt`
+* `python3.6 src/ciki.py`
