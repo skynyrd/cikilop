@@ -6,22 +6,21 @@
  \___|_|_|\_\_|_|\___/| .__/ 
                       |_|    
 ```
-
-[![asciicast](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR.png)](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR)
-
 Cikilop is a simple and easy to use mongo migration tool that encourages you to write your migration scripts in Python.
 All you need is docker (or python 3.6).
 
-### Why you should choose cikilop over many alternatives?
+### Why it's the tool you are looking for?
 1. You need to manage your migrations commit by commit in your CI pipeline. A commit can have more than one new migration, in that case you need to migrate them in order, and if commit fails, you need to revert them in reverse order.
 2. You want simply revert your migration from the CLI
 3. Your project is written in Python, you are more comfortable with pymongo then plain mongo script.
 4. You don't want to depend anything except docker
-5. You just like its name <3
+5. You just liked it's name <3
 
 ### Usage
 
 What you need: Prepare your migration scripts, prepare your config, run cikilop. That's it.
+
+[![asciicast](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR.png)](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR)
 
 __1. Build your migration script with only two functions:__
 
