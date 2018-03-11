@@ -1,5 +1,3 @@
-This readme is not completed.
-
 ```
       _ _    _ _             
   ___(_) | _(_) | ___  _ __  
@@ -8,6 +6,8 @@ This readme is not completed.
  \___|_|_|\_\_|_|\___/| .__/ 
                       |_|    
 ```
+
+[![asciicast](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR.png)](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR)
 
 Cikilop is a simple and easy to use mongo migration tool that encourages you to write your migration scripts in Python.
 All you need is docker (or python 3.6).
@@ -22,8 +22,6 @@ All you need is docker (or python 3.6).
 ### Usage
 
 What you need: Prepare your migration scripts, prepare your config, run cikilop. That's it.
-
-[![asciicast](https://asciinema.org/a/YMBAAn2L1xJ6ZhQyWfvuc1Euf.png)](https://asciinema.org/a/YMBAAn2L1xJ6ZhQyWfvuc1Euf)
 
 __1. Build your migration script with only two functions:__
 
