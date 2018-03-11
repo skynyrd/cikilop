@@ -26,5 +26,5 @@ def get_config():
 
         return config_dict
     except FileNotFoundError:
-        print(f"Cannot find file config.{env}.json")
+        print_red(f"Cannot find file config.{env}.json")
         exit()

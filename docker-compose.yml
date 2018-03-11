@@ -1,0 +1,16 @@
+version: '3'
+services:
+  cikilop:
+    build:
+      context: ./
+      dockerfile: Dockerfile-build
+    labels:
+      - "cikilop-build"
+    links:
+      - mongointegration
+    depends_on:
+      - mongointegration
+  mongointegration:
+    image: mongo
+    ports:
+      - "27117:27117"

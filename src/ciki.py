@@ -1,6 +1,7 @@
 import importlib
 import os
 import re
+from typing import List
 
 import click
 from asq.initiators import query
@@ -83,10 +84,14 @@ def migrate_them_all(mig_repo, parsed_migration_items):
         print_green("All the migration files already applied, skipping...")
 
 
-def get_parsed_migration_items():
-    migration_items = query(load_migration_items()).where(lambda mig: migrations_dir in mig.__name__ and
-                                                                      mig.__name__.split(migrations_dir)[1][
-                                                                          1] != "_").to_list()
+def get_parsed_migration_items() -> List[ParsedMigrationItem]:
+    try:
+        migration_items = query(load_migration_items()).where(lambda mig: migrations_dir in mig.__name__ and
+                                                                          mig.__name__.split(migrations_dir)[1][
+                                                                              1] != "_").to_list()
+    except FileNotFoundError:
+        print_red("Are you sure that you have binded your migrations using absolute path?")
+        exit(1)
 
     parsed_migration_items = []
     for migration_item in migration_items:
