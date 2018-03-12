@@ -6,7 +6,7 @@
  \___|_|_|\_\_|_|\___/| .__/ 
                       |_|    
 ```
-Cikilop is a simple and easy to use mongo migration tool that encourages you to write your migration scripts in Python.
+Cikilop is a simple and easy to use data migration tool for MongoDB that encourages you to write your migration scripts in Python.
 All you need is docker (or python 3.6).
 
 ### Why it's the tool you are looking for?
@@ -45,7 +45,7 @@ __3. Prepare your simple configuration file, Its name must be config.ENVIRONMENT
 
 ```json
 {
-  "db_name" : "deneme",
+  "db_name" : "exampledb",
   "migrations_coll_name" : "migration_list",
   "mongo_uri" : "mongodb://username:pass@127.0.0.1:27017..."
 }
@@ -57,13 +57,12 @@ __4. Run it!__
 
 Use the wrapper script (it also uses docker):
 
-```bash
-1. curl https://raw.githubusercontent.com/skynyrd/cikilop/master/ciki.sh --output ciki.sh && chmod +x ciki.sh
+1. `curl https://raw.githubusercontent.com/skynyrd/cikilop/master/ciki.sh --output ciki.sh && chmod +x ciki.sh`
 
-2. sudo ./ciki.sh -e ENVIRONMENT -c ABSOLUTE_CONFIG_FILE_PATH -m ABSOLUTE_MIGRATIONS_FOLDER_PATH
+2. `sudo ./ciki.sh -e ENVIRONMENT -c ABSOLUTE_CONFIG_FILE_PATH -m ABSOLUTE_MIGRATIONS_FOLDER_PATH`
 
-e.g.: sudo ./ciki.sh -e local -c $(pwd)/config.local.json -m $(pwd)/migrations
-```
+e.g.: `sudo ./ciki.sh -e local -c $(pwd)/config.local.json -m $(pwd)/migrations`
+
 To revert, add `-r true`
 
 or use docker directly:
