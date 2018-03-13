@@ -91,6 +91,6 @@ To revert, add `--revert` to `docker run` command
 
 Thanks!
 
-### Licence
+### License
 
 * GNU GPL v3
