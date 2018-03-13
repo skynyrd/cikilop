@@ -90,3 +90,7 @@ To revert, add `--revert` to `docker run` command
     * Reverts them by calling fail functions of the files. (ordering: first 02-example.py then 01-example.py)
 
 Thanks!
+
+### Licence
+
+* GNU v3
