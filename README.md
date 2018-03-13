@@ -93,4 +93,4 @@ Thanks!
 
 ### Licence
 
-* GNU v3
+* GNU GPL v3
