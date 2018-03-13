@@ -1,0 +1,6 @@
+sudo: required
+
+services:
+  - docker
+
+script: bash ./build-scripts/start_build.sh
