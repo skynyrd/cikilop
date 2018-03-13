@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/skynyrd/cikilop.svg?branch=master)](https://travis-ci.org/skynyrd/cikilop)
+[![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg)](https://hub.docker.com/r/skynyrd/cikilop/)
+
 ```
       _ _    _ _             
   ___(_) | _(_) | ___  _ __  
