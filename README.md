@@ -9,7 +9,7 @@
  \___|_|_|\_\_|_|\___/| .__/ 
                       |_|    
 ```
-Cikilop is a simple and easy to use data migration tool for MongoDB that encourages you to write your migration scripts in Python.
+Cikilop v.1.1 is a simple and easy to use data migration tool for MongoDB that encourages you to write your migration scripts in Python.
 All you need is docker (or python 3.6).
 
 ### Why it's the tool you are looking for?
@@ -23,21 +23,21 @@ All you need is docker (or python 3.6).
 
 What you need: Prepare your migration scripts, prepare your config, run cikilop. That's it.
 
-[![asciicast](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR.png)](https://asciinema.org/a/jJnpgClAfmCKASiKW02ZlLLRR)
+[![asciicast](https://asciinema.org/a/wU68w7hAWfl44YbYcTj6rL8P7.png)](https://asciinema.org/a/wU68w7hAWfl44YbYcTj6rL8P7)
 
 __1. Build your migration script with only two functions:__
 
 ```py
-def success(db):
-    col = db["example_collection"]
+def success(client):
+    col = client["exampledb"]["examplecol"]
     col.insert_one({"_id": 1})
 
 
-def fail(db):
-    col = db["example_collection"]
+def fail(client):
+    col = client["exampledb"]["examplecol"]
     col.remove({"_id": 1})
 ```
-Both functions must have an input parameter `db`, which cikilop ships to you. Indeed, it is regular `pymongo` database object (`pymongo.database.DataBase`).
+Both functions must have an input parameter `client`, which cikilop ships to you. Indeed, it is regular `pymongo` MongoClient object (`pymongo.MongoClient`).
 
 __2. You need to name your script as `01-xxxx.py`, it must start with a number with dash. Cikilop sorts your migration files using that number.__
 
@@ -48,13 +48,13 @@ __3. Prepare your simple configuration file, Its name must be config.ENVIRONMENT
 
 ```json
 {
-  "db_name" : "exampledb",
+  "migrations_db_name" : "migrations_db",
   "migrations_coll_name" : "migration_list",
   "mongo_uri" : "mongodb://username:pass@127.0.0.1:27017..."
 }
 ```
 
-_Note: The name you set with __migrations_coll_name__ is used by cikilop itself. It creates a collection and stores the migration records in it._
+_Note: The name you set for __migrations_coll_name__ and __migrations_db_name__ are used by cikilop itself. It creates a collection in specified db and stores the migration records in it._
 
 __4. Run it!__
 
@@ -90,6 +90,13 @@ To revert, add `--revert` to `docker run` command
     * Reverts them by calling fail functions of the files. (ordering: first 02-example.py then 01-example.py)
 
 Thanks!
+
+### Version History
+
+`1.0.1 => 1.1`
+
+* Feature: Multiple mongo db support by allowing user to access mongo client object.
+* Feature: Users can store migration records in distinct database. (It was restricted to the database script will run on)
 
 ### License
 

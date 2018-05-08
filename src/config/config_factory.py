@@ -20,8 +20,8 @@ def get_config():
             print_red(f"Configuration has missing field: migrations_coll_name")
             exit()
 
-        if not config_dict.get("db_name", None):
-            print_red(f"Configuration has missing field: db_name")
+        if not config_dict.get("migrations_db_name", None):
+            print_red(f"Configuration has missing field: migrations_db_name")
             exit()
 
         return config_dict

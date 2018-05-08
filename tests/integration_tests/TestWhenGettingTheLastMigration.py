@@ -29,6 +29,6 @@ class TestWhenGettingTheLastMigration(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         db = get_db_instance(client=MongoClient(test_config["mongo_uri"]), cfg=test_config)
-        col = db[test_config["migrations_coll_name"]]
+        col = db[test_config["migrations_db_name"]][test_config["migrations_coll_name"]]
         col.delete_one({"_id": cls.id1})
         col.delete_one({"_id": cls.id2})

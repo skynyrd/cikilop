@@ -10,7 +10,7 @@ class MigrationRepository:
     def __init__(self, client: MongoClient = None, cfg=None):
         cfg = get_config() if not cfg else cfg
         self._client = MongoClient(cfg["mongo_uri"]) if not client else client
-        self._db = self._client[cfg["db_name"]]
+        self._db = self._client[cfg["migrations_db_name"]]
         self._collection = self._db[cfg["migrations_coll_name"]]
 
     def create(self, migration: Migration):

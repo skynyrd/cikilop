@@ -12,7 +12,7 @@ docker-compose up --abort-on-container-exit
 
 if [ $? = 0 ]; then
   echo "Successfull build..."
-  docker build -t skynyrd/cikilop:latest -t skynyrd/cikilop:1.0.1 .
+  docker build -t skynyrd/cikilop:latest -t skynyrd/cikilop:1.1 .
 #  docker push skynyrd/cikilop
   exit 0
 else
