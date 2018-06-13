@@ -40,7 +40,7 @@ if [ -z "$c" ] || [ -z "$m" ] || [ -z "$e" ]; then
 fi
 
 if [ -z "$r" ] || [[ "$r" = "false" ]]; then
-    docker run -e env=$e -v $c:/app/src/config/config.$e.json -v $m:/app/src/migrations skynyrd/cikilop
+    docker run -e env=$e -v $c:/app/src/config/config.json -v $m:/app/src/migrations skynyrd/cikilop
 else
-    docker run -e env=$e -v $c:/app/src/config/config.$e.json -v $m:/app/src/migrations skynyrd/cikilop --revert
+    docker run -e env=$e -v $c:/app/src/config/config.json -v $m:/app/src/migrations skynyrd/cikilop --revert
 fi

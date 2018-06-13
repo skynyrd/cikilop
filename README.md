@@ -44,13 +44,16 @@ __2. You need to name your script as `01-xxxx.py`, it must start with a number w
 _Caveat: When applying the migration, scripts run with ascending order (e.g. `01-mig.py`, `02-mig.py`, `03-mig.py`).
  When reverting the migration, scripts run with descending order (e.g. `03-mig.py`, `02-mig.py`, `01-mig.py`)._
 
-__3. Prepare your simple configuration file, Its name must be config.ENVIRONMENT.json (ENVIRONMENT should be same as you used in run command):__
+__3. Prepare your simple configuration file, Its name must be config.json. You must define configuration for each environment. 
+There is an example for *local* environment above:__
 
 ```json
 {
-  "migrations_db_name" : "migrations_db",
-  "migrations_coll_name" : "migration_list",
-  "mongo_uri" : "mongodb://username:pass@127.0.0.1:27017..."
+  "local": {
+    "migrations_db_name" : "migrations_db",
+    "migrations_coll_name" : "migration_list",
+    "mongo_uri" : "mongodb://username:pass@127.0.0.1:27017..."
+  }
 }
 ```
 
@@ -71,9 +74,9 @@ To revert, add `-r true`
 or use docker directly:
 
 ```bash
-docker run -e env=local -v ABSOLUTE_CONFIG_FILE_PATH:/app/src/config/config.local.json -v ABSOLUTE_MIGRATIONS_FOLDER_PATH:/app/src/migrations skynyrd/cikilop
+docker run -e env=local -v ABSOLUTE_CONFIG_FILE_PATH:/app/src/config/config.json -v ABSOLUTE_MIGRATIONS_FOLDER_PATH:/app/src/migrations skynyrd/cikilop
 
-e.g. docker run -e env=local -v $(pwd)/config.local.json:/app/src/config/config.local.json -v $(pwd)/migrations:/app/src/migrations skynyrd/cikilop
+e.g. docker run -e env=local -v $(pwd)/config.json:/app/src/config/config.json -v $(pwd)/migrations:/app/src/migrations skynyrd/cikilop
 ```
 
 To revert, add `--revert` to `docker run` command

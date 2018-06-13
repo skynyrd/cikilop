@@ -9,8 +9,12 @@ print(f"Running for environment: {env}")
 
 def get_config():
     try:
-        config_file_stream = open(f'src/config/config.{env}.json')
-        config_dict = json.load(config_file_stream)
+        config_file_stream = open(f'src/config/config.json')
+        config_dict = json.load(config_file_stream).get(f"{env}", None)
+
+        if not config_dict:
+            print_red(f"Missing environment configuration: {env}")
+            exit()
 
         if not config_dict.get("mongo_uri", None):
             print_red(f"Configuration has missing field: mongo_uri")
@@ -26,5 +30,5 @@ def get_config():
 
         return config_dict
     except FileNotFoundError:
-        print_red(f"Cannot find file config.{env}.json")
+        print_red(f"Cannot find file config.json")
         exit()
